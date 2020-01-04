@@ -1,0 +1,4 @@
+.env
+.env-project
+docker/
+docker-compose.yaml
