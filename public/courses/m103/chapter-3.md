@@ -406,9 +406,45 @@ True or False: Shard keys are mutable.
 ## Picking a Good Shard Key
 
 The goal is a shard key whose values provides good write distribution.
+
 - Cardinality
   - (High) many possible unique shard key values
 - Frequency
   - (Low) Low repetition of a given unique shard key value
 - Monotonic Change
   - (Non-Monotonically) Avoid shard keys that change monotonically (like dates)
+
+Sharding is a permanent operation:
+
+- You cannot unshard a collection once sharded.
+- You cannot update the shard key of a sharded collection
+- You cannot update the values of the shard key for any document in the sharded collection.
+- Test your shard keys in a staging development first before sharding in production environments.
+
+Recap:
+
+- Good shard keys provide even write distribution
+- Where possible, good shard keys provide read isolation
+- High cardinality, Low Frequency shard key values ideal
+- Avoid Monotonically changing shard keys
+- Unsharding a collection is hard - avoid it!
+
+### Question
+
+Which of the following are indicators that a field or fields are a good shard key choice?
+
+- High Cardinality
+- Low Frequency
+- Non-monotonic change
+
+## Hashed Shard Keys
+
+- Cannot support geographically isolated read operations using zoned sharding
+- Hashed index must be on a single non-array field
+- Hashed indexes don't support fast sorting
+
+### Question
+
+Which of the following functions does Hashed Sharding support?
+
+- Even distribution of a monotonically changing shard key field
